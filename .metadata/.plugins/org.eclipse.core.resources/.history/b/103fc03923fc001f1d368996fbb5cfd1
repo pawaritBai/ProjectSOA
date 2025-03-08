@@ -1,0 +1,14 @@
+# ใช้ JDK 17 หรือเวอร์ชันที่ต้องการ
+FROM openjdk:17-jdk-slim
+
+# กำหนด working directory ใน Container
+WORKDIR /app
+
+# คัดลอกไฟล์ JAR ที่ถูก Build แล้วไปยัง Container
+COPY target/*.jar app.jar
+
+# เปิดพอร์ตที่ Spring Boot ใช้ (8080)
+EXPOSE 8080
+
+# คำสั่งรันแอปพลิเคชัน
+ENTRYPOINT ["java", "-jar", "app.jar"]

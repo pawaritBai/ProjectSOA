@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  shopthaioutfit-db:
+    image: mysql:8
+    container_name: shopthaioutfit-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: shopthaioutfit_db
+      MYSQL_USER: shopthaiuser
+      MYSQL_PASSWORD: shopthaipassword
+    ports:
+      - "3307:3306"
+    volumes:
+      - shopthaioutfit_mysql_data:/var/lib/mysql
+
+  shopthaioutfit-api:
+    build: .
+    container_name: shopthaioutfit-api
+    depends_on:
+      - shopthaioutfit-db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://shopthaioutfit-db:3306/shopthaioutfit_db
+      SPRING_DATASOURCE_USERNAME: shopthaiuser
+      SPRING_DATASOURCE_PASSWORD: shopthaipassword
+    ports:
+      - "8080:8080"
+    restart: always
+
+volumes:
+  shopthaioutfit_mysql_data:
