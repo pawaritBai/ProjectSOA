@@ -21,7 +21,7 @@ services:
       start_period: 10s
 
   shopthaioutfit-api:
-    build: .
+    image: baimai7272/shopthaioutfit-api:latest
     container_name: shopthaioutfit-api
     depends_on:
       shopthaioutfit-db:
@@ -35,7 +35,7 @@ services:
     restart: always
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin
+    image: baimai7272/phpmyadmin:latest
     container_name: shopthaioutfit-phpmyadmin
     restart: always
     depends_on:
@@ -45,9 +45,7 @@ services:
       PMA_PORT: 3306
       MYSQL_ROOT_PASSWORD: root
     ports:
-      - "8081:80"  # เปิด phpMyAdmin บน port 8081
+      - "8081:80"
 
 volumes:
   shopthaioutfit_mysql_data:
-
-
